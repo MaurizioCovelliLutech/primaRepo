@@ -1,0 +1,90 @@
+<mvc:View controllerName="sap.btp.esodata.controller.View1"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:f="sap.f"
+    xmlns:comp="sap.ui.comp.filterbar"
+    xmlns="sap.m">
+
+    <f:DynamicPage id="dynamicPageId" title="Prova">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Esercizio 4" />
+                </f:heading>
+                <f:expandedHeading>
+                    <Title text="Title" />
+                </f:expandedHeading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                <Button text="Dettagli" press="navigateDettagli"/>
+                <Button text="Scarica Odata" press="exportData"/>
+                <Button icon="sap-icon://excel-attachment" text="Toolbar"/>
+                <Button xmlns="sap.m" text="Fragment" press="onValueHelpRequested"/>
+                    <comp:FilterBar id="filterBar" search="onSearch">
+                        <comp:filterGroupItems>
+                            <comp:FilterGroupItem name="nome" groupName="filters" label="CustomerID" mandatory="true" >
+                                <comp:control>
+                                    <Input id="customerIdInput" placeholder="Inserisci Customer ID" />
+                                </comp:control>
+                            </comp:FilterGroupItem>
+                            <comp:FilterGroupItem name="orderDateInputId" groupName="filters" label="DateId">
+                                <comp:control>
+		                           <Button
+			                            ariaHasPopup="Dialog"
+			                            tooltip="Open Date Picker"
+			                            icon="sap-icon://appointment-2"
+			                            press=".openDatePicker" />       
+                                </comp:control>
+                            </comp:FilterGroupItem>
+                        </comp:filterGroupItems>
+                    </comp:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table id="exportTable" items="{modOrder>/}" mode="SingleSelectLeft">
+                <columns>
+                    <Column>
+                        <Text text="OrderID" />
+                    </Column>
+                    <Column>
+                        <Text text="CustomerID" />
+                    </Column>
+                    <Column>
+                        <Text text="OrderDate" />
+                    </Column>
+                    <Column>
+                        <Text text="ShipAddress" />
+                    </Column>
+                    <Column>
+                        <Text text="ShipCity" />
+                    </Column>
+                </columns>
+                <items> <!--aggregazione item-->
+                    <ColumnListItem>
+                        <cells>
+                            <Label text="{modOrder>OrderID}" />
+                            <Label text="{modOrder>CustomerID}" />
+                            <Label text="{path: 'modOrder>OrderDate' , formatter:'.formatDate'}" />
+                            <Label text="{modOrder>ShipAddress}" />
+                            <Label text="{modOrder>ShipCity}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+    <DatePicker
+		id="HiddenDP"
+		hideInput="true"
+        dateValue="{path:'Tdate', formatter:'formatDate'}"
+		change=".changeDateHandler" />
+</mvc:View>

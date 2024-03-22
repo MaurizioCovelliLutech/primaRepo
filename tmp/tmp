@@ -1,0 +1,45 @@
+/*sap.ui.define([
+    "sap/ui/core/mvc/Controller"
+],
+    /**
+     * @param {typeof sap.ui.core.mvc.Controller} Controller
+     
+    function (Controller) {
+        "use strict";
+
+        return Controller.extend("sap.btp.esodata.controller.View1", {
+            onInit: function () {
+
+                //unico valore trascurabile è {serviceUrl} che può essere passato direttamente come sotto 
+                var oModel = new ODataModel("http://services.odata.org/Northwind/Northwind.svc/");
+                var oModel = new ODataModel({ serviceUrl: "http://services.odata.org/Northwind/Northwind.svc" });
+
+                //cosi accede ai dati in un odata model 
+                /*You can only access single entities and properties with this method. To access entity sets, you can get the binding contexts of 
+                all read entities via a list binding. The values returned by this method are copies of the data in the model, not references as in the JSONModel.*/
+               /* oModel.getProperty("/Customer('ALFKI')/Address");
+
+                //ESEMPIO DI CREAZIONE DI ENTRY
+                // create an entry in the Products collection with the specified properties and values as initial data
+                var oContext = oModel.createEntry("/ProductSet", {
+                    properties: { Name: "Laptop X", Description: "New Laptop", Price: "1000", CurrencyCode: "USD" }
+                });
+                // bind a form against the transient context for the newly created entity
+                oForm.setBindingContext(oContext);
+
+                // submit the changes: creates entity in the back end
+                oModel.submitChanges({ success: mySuccessHandler, error: myErrorHandler });
+                // handle successful creation or reset
+                oContext.created().then(
+                    function () { /* successful creation */ //},
+                //    function () { /* deletion of the created entity before it is persisted */ }
+                //);
+
+                /* delete the created entity
+                oContext.delete();
+
+            }
+        });
+    });
+
+    */

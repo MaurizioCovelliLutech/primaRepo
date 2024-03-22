@@ -1,0 +1,39 @@
+<mvc:View controllerName="sap.btp.esodata.controller.View2"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+        <Table id="detailsTable" items="{modOrderDetails>/}">
+                <columns>
+                    <Column>
+                        <Text text="OrderID" />
+                    </Column>
+                    <Column>
+                        <Text text="CustomerID" />
+                    </Column>
+                    <Column>
+                        <Text text="UnitPrice" />
+                    </Column>
+                    <Column>
+                        <Text text="Quantity" />
+                    </Column>
+                    <Column>
+                        <Text text="Discount" />
+                    </Column>
+                </columns>
+                <items> <!--aggregazione item-->
+                    <ColumnListItem>
+                        <cells>
+                            <Label text="{modOrderDetails>OrderID}" />
+                            <Label text="{modOrderDetails>CustomerID}" />
+                            <Label text="{modOrderdetails>UnitPrice}" />
+                            <Label text="{modOrderDetails>Quantity}" />
+                            <Label text="{modOrderDetails>Discount}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

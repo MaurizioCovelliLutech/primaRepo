@@ -230,7 +230,55 @@ sap.ui.define([
 				oDialog.open();
                 this.getView().addDependent(oDialog); //appDepended espande gli ogeetti che sono sulla view anche nel fragment, serve per i18n e modelli e sono definiti li, non sono definiti sul fragment che non ha il controller
             }.bind(this))
-        }
+        },
+
+        oonValueHelpSearch: async function(oEvent) {
+
+            var sValue = oEvent.getParameter("arguments").getValue(); //il codice si rompe qua
+            var oFilter = new sap.ui.model.Filter("CustomerID", sap.ui.model.FilterOperator.Contains, sValue);
+            aFilters.push(oFilter);
+        
+            var oModel = new ODataModel("/V2/Northwind/Northwind.svc/");
+            const oData = await new Promise((resolve, reject) => {
+                oModel.read("/Orders", {
+                    filters: [oFilter],
+                    success: function(oData, response) {
+                        resolve(oData);
+                    },
+                    error: function(error) {
+                        reject(error);
+                    }
+                });
+            });
+        
+            var oTable = this.byId("customerTable");
+            oTable.setModel(new JSONModel(oData.results));
+        },
+        
+        
+        onValueHelpOK: function(oEvent) {
+            var oSelectedItem = oEvent.getParameter("tokens")[0];
+            if (oSelectedItem) {
+                var sCustomerID = oSelectedItem.getKey();
+                this.getView().byId("customerIdInput").setValue(sCustomerID);
+            }
+            this.onValueHelpCancel();
+        },
+        
+        onValueHelpCancel: function() {
+            this._oValueHelpDialog.close();
+            this._oValueHelpDialog.destroy();
+            this._oValueHelpDialog = null;
+        },
+
+        onValueHelpSelectionChange: function(oEvent) {
+            var selectedCustomerID = oEvent.getParameter("listItem").getCells()[0].getText();
+            var oFilterBar = this.getView().byId("filterBar");
+            oFilterBar.getFilterGroupItems()[0].getControl().setValue(selectedCustomerID);
+            oView.byId("customerIdInput").setValue(selectedCustomerID);
+        },
+        
+        
 
 
         //MIA PRIMA IMPLEMENTAZIONE FRAGMENT DA RIVEDERE PROBLEMA CON PATH 

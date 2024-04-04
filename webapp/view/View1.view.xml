@@ -27,7 +27,7 @@
                         <comp:filterGroupItems>
                             <comp:FilterGroupItem name="nome" groupName="filters" label="CustomerID" mandatory="true" >
                                 <comp:control>
-                                    <Input id="customerIdInput" placeholder="Inserisci Customer ID" />
+                                    <Input id="customerIdInput" placeholder="Inserisci Customer ID" showValueHelp="true" valueHelpRequest="onValueHelpRequested" />
                                 </comp:control>
                             </comp:FilterGroupItem>
                             <comp:FilterGroupItem name="orderDateInputId" groupName="filters" label="DateId">

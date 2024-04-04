@@ -1,6 +1,31 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
-<Dialog>
-	<Label text="LabelProva"/>
-	<Button id="buttonFragmentTest" text="Ciao Ciao" press=""/>
-</Dialog>
+<core:FragmentDefinition xmlns:vhd="sap.ui.comp.valuehelpdialog" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:comp="sap.ui.comp.filterbar"
+>
+    <!-- <vhd:ValueHelpDialog
+        title="Prova Value Help"
+        supportMultiselect="false"
+        supportRanges="true"
+        ok="onValueHelpOK"
+        afterClose="onValueHelpAfterClose"
+        key="CustomerID" 
+        cancel="onValueHelpCancel">
+        -->
+        <Dialog>
+        <comp:FilterBar search="onValueHelpSearch">
+            <SearchField width="100%"  search="onValueHelpSearch"/>
+        </comp:FilterBar>
+        <Table id="customerTable" growing="true" growingThreshold="100" selectionChange="onValueHelpSelectionChange" mode="SingleSelectMaster" items="{ path: '/Orders' }">
+            <columns>
+                <Column>
+                    <Label text="Customer ID"/>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{CustomerID}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Dialog>
 </core:FragmentDefinition>

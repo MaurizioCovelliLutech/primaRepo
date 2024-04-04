@@ -232,10 +232,12 @@ sap.ui.define([
             }.bind(this))
         },
 
-        oonValueHelpSearch: async function(oEvent) {
+        onValueHelpSearch: async function(oEvent) {
 
-            var sValue = oEvent.getParameter("arguments").getValue(); //il codice si rompe qua
+            var sValue = oEvent.getParameter("query"); //il codice si rompe qua
             var oFilter = new sap.ui.model.Filter("CustomerID", sap.ui.model.FilterOperator.Contains, sValue);
+            var aFilters = [];
+            
             aFilters.push(oFilter);
         
             var oModel = new ODataModel("/V2/Northwind/Northwind.svc/");
@@ -252,7 +254,7 @@ sap.ui.define([
             });
         
             var oTable = this.byId("customerTable");
-            oTable.setModel(new JSONModel(oData.results));
+           this.getView().setModel(new JSONModel(oData.results), "modFragment");
         },
         
         

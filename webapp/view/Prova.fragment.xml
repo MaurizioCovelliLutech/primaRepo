@@ -10,10 +10,10 @@
         cancel="onValueHelpCancel">
         -->
         <Dialog>
-        <comp:FilterBar search="onValueHelpSearch">
+        <!-- <comp:FilterBar search="onValueHelpSearch"> -->
             <SearchField width="100%"  search="onValueHelpSearch"/>
-        </comp:FilterBar>
-        <Table id="customerTable" growing="true" growingThreshold="100" selectionChange="onValueHelpSelectionChange" mode="SingleSelectMaster" items="{ path: '/Orders' }">
+        <!-- </comp:FilterBar> -->
+        <Table id="customerTable" growing="true" growingThreshold="100" selectionChange="onValueHelpSelectionChange" mode="SingleSelectLeft" items="{modFragment>/}">
             <columns>
                 <Column>
                     <Label text="Customer ID"/>
@@ -22,7 +22,7 @@
             <items>
                 <ColumnListItem>
                     <cells>
-                        <Text text="{CustomerID}"/>
+                        <Text text="{modFragment>CustomerID}" />
                     </cells>
                 </ColumnListItem>
             </items>
